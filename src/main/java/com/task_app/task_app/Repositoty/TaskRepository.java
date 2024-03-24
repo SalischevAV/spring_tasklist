@@ -5,11 +5,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface TaskRepository{
+
+    Optional<Task> findById(Long taskId);
     List<Task> findAllByUserId(Long userId);
 
     void assignToUserById(Long taskId, Long userId);
+
+    void update(Task task);
+
+    void create(Task task);
+
+    void delete(Long taskId);
 
 }

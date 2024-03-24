@@ -1,22 +1,21 @@
-package com.task_app.task_app.Service.Impl;
+package com.task_app.task_app.Repositoty.Impl;
 
 import com.task_app.task_app.Entity.Task.Task;
-import com.task_app.task_app.Service.TaskService;
-import org.springframework.stereotype.Service;
+import com.task_app.task_app.Repositoty.TaskRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class TaskServiceImpl implements TaskService {
-
+@Repository
+public class TaskRepositoryImpl implements TaskRepository {
     @Override
-    public Optional<Task> getById(Long taskId) {
+    public Optional<Task> findById(Long taskId) {
         return Optional.empty();
     }
 
     @Override
-    public List<Task> getAllByUserId(Long userId) {
+    public List<Task> findAllByUserId(Long userId) {
         return null;
     }
 
@@ -31,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void create(Task task, Long userId) {
+    public void create(Task task) {
 
     }
 

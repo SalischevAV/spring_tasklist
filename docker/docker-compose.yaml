@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: my-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: your-mysql-password
+      MYSQL_DATABASE: your-database-name
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/ваше_имя_пользователя/мой/локальный/каталог:/mnt/data

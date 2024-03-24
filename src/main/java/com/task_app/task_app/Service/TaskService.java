@@ -3,15 +3,17 @@ package com.task_app.task_app.Service;
 import com.task_app.task_app.Entity.Task.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskService {
-    Task getById(Long taskId);
-
+    Optional<Task> getById(Long taskId);
     List<Task> getAllByUserId(Long userId);
 
-    Task update(Task task);
+    void assignToUserById(Long taskId, Long userId);
 
-    Task create(Task task, Long userId);
+    void update(Task task);
 
-    void delete (Long taskId);
+    void create(Task task, Long userId);
+
+    void delete(Long taskId);
 }

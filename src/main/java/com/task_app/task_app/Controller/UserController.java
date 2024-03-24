@@ -16,9 +16,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "${apiPrefix}/users")
+@RequestMapping("${apiPrefix}/users")
 @RequiredArgsConstructor
 @Validated
 public class UserController {
@@ -32,34 +33,34 @@ public class UserController {
     public ResponseEntity<?> updateUser(@Validated(OnUpdate.class) @RequestBody UserDto userDto){
         try {
             User user = userMapper.toEntity(userDto);
-            User updatedUser = userService.update(user);
-            return ResponseEntity.ok().body(userMapper.toDto(updatedUser));
+            userService.update(user);
+            return ResponseEntity.ok().body("ok");
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @GetMapping("/${id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         try {
-            User user = userService.getById(id);
-            return ResponseEntity.ok().body(userMapper.toDto(user));
+          User user = userService.getById(id).orElse(null);
+          return ResponseEntity.ok().body(userMapper.toDto(user));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/${id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable Long id){
         try {
             userService.delete(id);
-            return ResponseEntity.ok("${id}");
+            return ResponseEntity.ok(id);
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @GetMapping("/${id}/tasks")
+    @GetMapping("/{id}/tasks")
     public ResponseEntity<?> getTasksByUserId(@PathVariable Long id){
         try{
             List<Task> tasks = taskService.getAllByUserId(id);
@@ -69,15 +70,15 @@ public class UserController {
         }
     }
 
-    @PostMapping ("/${id}/tasks")
+    @PostMapping ("/{id}/tasks")
     public ResponseEntity<?> createTask(
             @PathVariable Long id,
             @Validated(OnCreate.class) @RequestBody TaskDto taskDto
     ){
         try{
             Task task = taskMapper.toEntity(taskDto);
-            Task createdTask = taskService.create(task, id);
-            return  ResponseEntity.ok().body(taskMapper.toDto(createdTask));
+            taskService.create(task, id);
+            return  ResponseEntity.ok().body("ok");
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -1,22 +1,21 @@
-package com.task_app.task_app.Service.Impl;
+package com.task_app.task_app.Repositoty.Impl;
 
 import com.task_app.task_app.Entity.User.Role;
 import com.task_app.task_app.Entity.User.User;
-import com.task_app.task_app.Service.UserService;
-import org.springframework.stereotype.Service;
+import com.task_app.task_app.Repositoty.UserRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Service
-public class UserServiceImpl implements UserService {
-
+@Repository
+public class UserRepositoryImpl implements UserRepository {
     @Override
-    public Optional<User> getById(Long id) {
+    public Optional<User> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<User> getByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return Optional.empty();
     }
 

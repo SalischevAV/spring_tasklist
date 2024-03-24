@@ -1,5 +1,6 @@
 package com.task_app.task_app.Entity.Task;
 
+import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;

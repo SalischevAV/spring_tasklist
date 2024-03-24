@@ -11,28 +11,28 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "${apiPrefix}/tasks")
+@RequestMapping("${apiPrefix}/tasks")
 @RequiredArgsConstructor
 @Validated
 public class TaskController {
     private final TaskService service;
     private final TaskMapper taskMapper;
 
-    @GetMapping("/${id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getTaskById(@PathVariable Long id){
         try {
-            Task task = service.getById(id);
+            Task task = service.getById(id).orElse(null);
             return ResponseEntity.ok().body(taskMapper.toDto(task));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/${id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTaskById(@PathVariable Long id){
         try {
             service.delete(id);
-            return ResponseEntity.ok("${id}");
+            return ResponseEntity.ok(id);
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -42,8 +42,8 @@ public class TaskController {
     public ResponseEntity<?> updateTask(@Validated(OnUpdate.class) @RequestBody TaskDto taskDto){
         try {
          Task task = taskMapper.toEntity(taskDto);
-         Task updatedTask = service.update(task);
-            return ResponseEntity.ok().body(taskMapper.toDto(updatedTask));
+         service.update(task);
+            return ResponseEntity.ok().body("ok");
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

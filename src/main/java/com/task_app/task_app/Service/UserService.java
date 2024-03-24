@@ -1,16 +1,21 @@
 package com.task_app.task_app.Service;
 
+import com.task_app.task_app.Entity.User.Role;
 import com.task_app.task_app.Entity.User.User;
 
+import java.util.Optional;
+
 public interface UserService {
-    User getById(Long id);
-    User getByUserName(String username);
+    Optional<User> getById(Long id);
+    Optional<User> getByUsername(String username);
 
-    User update(User user);
+    void update(User user);
 
-    User create(User user);
+    void create(User user);
+
+    void insertUserRole(Long userId, Role role);
 
     boolean isTaskOwner(Long userId, Long taskId);
 
-    void delete (Long id);
+    void delete(Long userId);
 }
