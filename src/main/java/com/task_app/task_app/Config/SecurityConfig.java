@@ -68,35 +68,3 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 }
-
-//deprecated version
-//@Bean
-//public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//    httpSecurity
-//            .csrf().disable()
-//            .cors()
-//            .and()
-//            .httpBasic().disable()
-//            .sessionManagement()
-//            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and()
-//            .exceptionHandling()
-//            .authenticationEntryPoint(((request, response, authException) -> {
-//                response.getStatus(HttpStatus.UNAUTHORIZED.value());
-//                response.getWriter().write("Unauthorized");
-//            }))
-//            .accessDeniedHandler(((request, response, accessDeniedException) -> {
-//                response.getStatus();
-//                response.getStatus(HttpStatus.FORBIDDEN.value());
-//                response.getWriter().write("Forbidden");
-//            }))
-//            .and()
-//            .authorizeHttpRequests()
-//            .requestMatchers("/api/v1/auth/**").permitAll()
-//            .anyRequest().authenticated()
-//            .and()
-//            .anonymous().disable()
-//            .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
-//
-//    return httpSecurity.build();
-//}
