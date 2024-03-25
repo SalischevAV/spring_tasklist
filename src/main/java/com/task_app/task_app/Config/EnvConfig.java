@@ -9,9 +9,11 @@ public class EnvConfig {
         String dbUrl = dotenv.get("DB_URL");
         String dbUser = dotenv.get("DB_USER");
         String dbPassword = dotenv.get("DB_PASSWORD");
+        String JwtSecret = dotenv.get("JWT_SECRET");
 
         System.setProperty("DB_URL", dbUrl);
         System.setProperty("DB_USER", dbUser);
         System.setProperty("DB_PASSWORD", dbPassword);
+        System.setProperty("JWT_SECRET", JwtSecret);
     }
 }

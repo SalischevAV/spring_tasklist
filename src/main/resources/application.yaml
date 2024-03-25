@@ -16,4 +16,10 @@ spring:
       dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
 
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    access: 3600000
+    refresh: 2592000000
+
 apiPrefix: /api/v1
