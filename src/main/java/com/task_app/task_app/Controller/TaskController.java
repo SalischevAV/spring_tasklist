@@ -21,7 +21,7 @@ public class TaskController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getTaskById(@PathVariable Long id){
         try {
-            Task task = service.getById(id).orElse(null);
+            Task task = service.getById(id);
             return ResponseEntity.ok().body(taskMapper.toDto(task));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -42,8 +42,7 @@ public class TaskController {
     public ResponseEntity<?> updateTask(@Validated(OnUpdate.class) @RequestBody TaskDto taskDto){
         try {
          Task task = taskMapper.toEntity(taskDto);
-         service.update(task);
-            return ResponseEntity.ok().body("ok");
+            return ResponseEntity.ok().body(service.update(task));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

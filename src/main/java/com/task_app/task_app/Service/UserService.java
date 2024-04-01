@@ -6,12 +6,12 @@ import com.task_app.task_app.Entity.User.User;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> getById(Long id);
-    Optional<User> getByUsername(String username);
+    User getById(Long id);
+    User getByUsername(String username);
 
     void update(User user);
 
-    void create(User user);
+    User create(User user);
 
     void insertUserRole(Long userId, Role role);
 
