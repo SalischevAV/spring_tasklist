@@ -26,7 +26,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 t.expiration_date as task_expiration_date,
                 t.status as task_status
             FROM tasks t
-            WHERE id=?
+            WHERE t.id=?
             """;
     private final String FIND_ALL_BY_USER_ID = """
             SELECT
@@ -37,7 +37,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 t.status as task_status
             FROM tasks t
                 JOIN users_tasks ut on t.id = ut.task_id
-            WHERE id=?
+            WHERE ut.user_id=?
             """;
     private final String ASSIGN = """
             INSERT INTO users_tasks (task_id, user_id)
@@ -70,7 +70,7 @@ public class TaskRepositoryImpl implements TaskRepository {
             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID);
             statement.setLong(1, taskId);
             try(ResultSet rs = statement.executeQuery()){
-                return Optional.ofNullable(TaskRowMapper.mapRow(rs));
+               return Optional.ofNullable(TaskRowMapper.mapRow(rs));
             }
         } catch (SQLException e) {
             throw new ResourceMappingException("SQL Error while searching task by Id");

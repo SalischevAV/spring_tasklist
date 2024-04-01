@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-//@RequiredArgsConstructor
 @RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class SecurityConfig {
     private final ApplicationContext applicationContext;

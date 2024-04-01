@@ -31,43 +31,28 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<?> updateUser(@Validated(OnUpdate.class) @RequestBody UserDto userDto){
-        try {
             User user = userMapper.toEntity(userDto);
             userService.update(user);
-            return ResponseEntity.ok().body("ok");
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            User updatedUser = userService.getById(user.getId());
+            return ResponseEntity.ok().body(userMapper.toDto(updatedUser));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id){
-        try {
           User user = userService.getById(id);
           return ResponseEntity.ok().body(userMapper.toDto(user));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable Long id){
-        try {
             userService.delete(id);
             return ResponseEntity.ok(id);
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     @GetMapping("/{id}/tasks")
     public ResponseEntity<?> getTasksByUserId(@PathVariable Long id){
-        try{
             List<Task> tasks = taskService.getAllByUserId(id);
             return  ResponseEntity.ok().body(taskMapper.toDto(tasks));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     @PostMapping ("/{id}/tasks")
@@ -75,12 +60,8 @@ public class UserController {
             @PathVariable Long id,
             @Validated(OnCreate.class) @RequestBody TaskDto taskDto
     ){
-        try{
             Task task = taskMapper.toEntity(taskDto);
             return  ResponseEntity.ok().body(taskService.create(task, id));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
 

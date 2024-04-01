@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.update(user);
-
     }
 
     @Override
