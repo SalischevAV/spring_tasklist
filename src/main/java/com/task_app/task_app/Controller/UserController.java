@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         try {
-          User user = userService.getById(id).orElse(null);
+          User user = userService.getById(id);
           return ResponseEntity.ok().body(userMapper.toDto(user));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -77,8 +77,7 @@ public class UserController {
     ){
         try{
             Task task = taskMapper.toEntity(taskDto);
-            taskService.create(task, id);
-            return  ResponseEntity.ok().body("ok");
+            return  ResponseEntity.ok().body(taskService.create(task, id));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

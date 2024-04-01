@@ -1,7 +1,7 @@
 
 INSERT INTO users (name, username, password)
-VALUES ('John Doe', 'johndoe@gmail.com', 'hashed_password_for_johndoe'),
-       ('Mike Smith', 'mikesmith@yahoo.com', 'hashed_password_for_mikesmith');
+VALUES ('John Doe', 'johndoe@gmail.com', '$2a$10$JglZuZpAom6Alv1FBBc6GO.H9OFiU5Vwkg6TvtIECA9dMA5ndNjXG'),
+       ('Mike Smith', 'mikesmith@yahoo.com', '$2a$10$XqStBXNpfGluweOWrjgi9.B0f2gj/ih7unvV.m/iJTnzF9snOfonq');
 
 
 INSERT INTO tasks (title, description, status, expiration_date)
