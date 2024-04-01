@@ -22,6 +22,7 @@ public class TaskRowMapper {
             if(timestamp != null){
                 task.setExpirationDate(timestamp.toLocalDateTime());
             }
+            return task;
         }
         return null;
     }

@@ -26,31 +26,19 @@ public class AuthController {
     private  final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Validated @RequestBody JwtRequest loginRequest){
-        try{
-            return ResponseEntity.ok().body(authService.login(loginRequest));
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public JwtResponse login(@Validated @RequestBody JwtRequest loginRequest){
+            return authService.login(loginRequest);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Validated(OnCreate.class) @RequestBody UserDto userDto){
-        try{
+    public UserDto register(@Validated(OnCreate.class) @RequestBody UserDto userDto){
             User user = userMapper.toEntity(userDto);
             User created = userService.create(user);
-            return ResponseEntity.ok().body(userMapper.toDto(created));
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            return userMapper.toDto(created);
     }
 
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(@RequestBody String refreshToken){
-        try{
             return ResponseEntity.ok().body(authService.refresh(refreshToken));
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 }
